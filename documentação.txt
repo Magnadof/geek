@@ -1,0 +1,3 @@
+arquivo func contem todas as funçoes
+
+função cor- necessita 2 paramentros, o primeiro é um numero referente a cor desejada e o segundo uma string semdo o texto desejado, e a função retorna a string com a coloração
