@@ -156,8 +156,13 @@ Welcome to my anime bank, choose an option
 
                                 elif choose == 3:
                                     genera= df.loc[df["nome"]==name,'genero'].values[0]
+                                    if func.pontuacao(genera)>1:
+                                        verb='are'
+                                    else:
+                                        verb='is'
+                                    print(f'The gender of {name} {verb} {genera}')
 
-                                    print(f'\nThe genera of {name} are {genera}\n')
+                                    
 
 
 
