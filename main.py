@@ -1,3 +1,5 @@
+from operator import index
+from selectors import EpollSelector
 import pandas as pd
 import func
 from time import sleep
@@ -106,26 +108,24 @@ Welcome to my anime bank, choose an option
                     if name in df["nome"].str.lower().values:
                         while True:
                             try:
-                                print(f"What you want to change from {name.upper()}?")
+                                func.cor(93,f'What you want to change from {name.upper()}?')
                                 choose = int(
                                     input(
-                                        """'
+                                        """
 [1] Name
 [2] Number of episodes
 [3] Gender
 [4] Description
-[5] back       
+[5] back
+
 """
                                     )
                                 )
                                 if choose == 1:
-                                    temporary_name = input(
-                                        "what name do you want to put?: "
-                                    )
+                                    temporary_name = input("what name do you want to put?: ")
                                     while True:
                                         choose = input(
-                                            f"""Do you want to change the name from {name} to {temporary_name} ? y/n\n"""
-                                        ).lower()
+                                            f"""Do you want to change the name from {name} to {temporary_name} ? y/n\n""").lower()
                                         if choose == "y":
                                             new_name = df.loc[
                                                 df["nome"].str.lower() == name, "nome"
@@ -136,17 +136,31 @@ Welcome to my anime bank, choose an option
                                         else:
                                             func.cor(31, "Ivalid value")
                                 elif choose == 2:
+                                    episodes=None
                                     while True:
                                         try:
-                                            episodes = int(
-                                                input(
-                                                    f"How many episodes does {name} have?"
-                                                )
-                                            )
+                                            episodes = int(input(f"How many episodes does {name} have? " ))
+                                            break
                                         except:
                                             func.cor(31, "must add a numeric value")
+
+                                    while True:
+                                        choose=input('are you sure that x has y y episodes ? Y/N')
+                                        if choose.lower() == 'y':
+                                            df.loc[df["nome"] == name, 'eps']=episodes
+                                            break
+                                        elif choose.lower() == 'n':
+                                            break
+                                        else:
+                                            func.cor(31, "You must answer with Y or N")
+
                                 elif choose == 3:
-                                    pass
+                                    genera= df.loc[df["nome"]==name,'genero'].values[0]
+
+                                    print(f'\nThe genera of {name} are {genera}\n')
+
+
+
                                 elif choose == 4:
                                     pass
                                 elif choose == 5:
